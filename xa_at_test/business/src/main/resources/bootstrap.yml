@@ -1,0 +1,18 @@
+server:
+  port: 18071
+spring:
+  cloud:
+    nacos:
+      discovery:
+        group: SEATA_GROUP
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+        namespace:
+      config:
+        server-addr: 127.0.0.1:8848
+        username: nacos
+        password: nacos
+        group: SEATA_GROUP
+        file-extension: yml
+        namespace: public

@@ -1,0 +1,41 @@
+
+spring:
+  application:
+    name: order
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/seata?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    username: root
+    password: 112233
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 10240MB
+      max-request-size: 10240MB
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.central.file.model
+  global-config:
+    db-config:
+      id-type: INPUT
+
+seata:
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 192.168.163.1:8848  # ncaos?? ? ??????? 127.0.0.1  ???????????seata?????nocas????
+      namespace:
+      group: SEATA_GROUP
+      application: seata-server   # ?? seata?????????
+      username: nacos
+      password: nacos
+      client:
+        timeout: 30000
+        server-addr-timeout-ms: 30000
+  tx-service-group: xa-seata-demo  # ???
+  service:
+    vgroup-mapping:
+      xa-seata-demo: default   #????register cluster????
+  application-id: ${spring.application.name}
+  data-source-proxy-mode: AT

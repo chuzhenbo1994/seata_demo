@@ -1,0 +1,4 @@
+com\example\common\CommonApplication.class
+com\example\common\vo\Result.class
+com\example\common\vo\CommonConstant.class
+com\example\common\vo\TestDatas.class

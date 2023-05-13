@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: server-b
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/seata-test-service-b?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai
+    username: root
+    password: 112233
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 10240MB
+      max-request-size: 10240MB
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.central.file.model
+  global-config:
+    db-config:
+      id-type: INPUT
+
+seata:
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 192.168.163.1:8848  # ncaos地址 。 注意这里不要用 127.0.0.1  会连不上（感觉是需要从seata服务器去连nocas服务器）
+      namespace:
+      group: SEATA_GROUP
+      application: seata-server   # 对应 seata服务端中的服务名称
+      username: nacos
+      password: nacos
+      client:
+        timeout: 30000
+        server-addr-timeout-ms: 30000
+  tx-service-group: seata-demo  # 事务组
+  service:
+    vgroup-mapping:
+      seata-demo: default   #对应注册register cluster中的名称
+  application-id: ${spring.application.name}
